@@ -1,0 +1,701 @@
+<!DOCTYPE html> 
+<html lang="vi"> 
+<head> 
+	<meta charset="" ="UTF-8"> 
+	<meta name="viewport" content="width=devide-width,initial-scale=1.0"> 
+	<title> Xây dựng chiến dịch truyền thông tích cực trên mạng xã hội </title>
+	<script src = "https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script> 
+	<style> 
+		@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Quicksand:wght@400;600;700&display=swap'); 
+		* { 
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+		 }
+
+		 body { 
+		 	font-family: 'Quicksand',sans-serif;
+		 	overflow: hidden;
+		 	height: 100vh; 
+		 	background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%); 
+		}
+
+		  .bg-circles { 
+		  	position: fixed; 
+		  	top: 0; 
+		  	left: 0;
+		  	width: 100%;
+		  	height: 100%;
+		  	z-index: 0;
+		  	overflow: hidden;
+		}
+
+		   .circle { 
+		   	position: absolute; 
+		   	border-radius: 50%;
+		   	background: rgba(255, 255, 255, 0.1);
+		   	animation: float 15s infinite ease-in-out;
+		}
+
+		    .circle:nth-child(1) { width: 80px; height: 80px; left:10%; top: 20%; animation-delay:0s; }
+		    .circle:nth-child(2) { width: 120px; height: 120px; left:80%; top: 10%; animation-delay:2s; }
+		    .circle:nth-child(3) { width: 60px; height: 60px; left:30%; top: 70%; animation-delay:4s; }
+		    .circle:nth-child(4) { width: 100px; height: 100px; left:70%; top: 60%; animation-delay:6s; }
+		    .circle:nth-child(5) { width: 150px; height: 150px; left:50%; top: 40%; animation-delay:8s; }
+
+		 	@keyframes float {
+		    	0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.3; }
+		    	50% { transform: translateY(-30px) rotate(180deg); opacity: 0.6; }
+		    }
+
+		    .stars {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        .star {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 2s infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.5); }
+        }
+
+        /* Train container */
+        .train-container {
+            position: fixed;
+            bottom: 100px;
+            left: -600px;
+            z-index: 10;
+            animation: trainMove 5s ease-in-out forwards;
+        }
+
+        @keyframes trainMove {
+            0% { left: -600px; }
+            100% { left: 120%; }
+        }
+
+        /* Train */
+        .train {
+            display: flex;
+            align-items: flex-end;
+            flex-direction: row-reverse;
+            transform: scaleX(-1);
+        }
+
+        .locomotive {
+            position: relative;
+            width: 180px;
+            height: 100px;
+        }
+
+        .loco-body {
+            position: absolute;
+            bottom: 20px;
+            width: 160px;
+            height: 60px;
+            background: linear-gradient(180deg, #e74c3c 0%, #c0392b 100%);
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+        }
+
+        .loco-cabin {
+            position: absolute;
+            bottom: 80px;
+            right: 10px;
+            width: 70px;
+            height: 50px;
+            background: linear-gradient(180deg, #3498db 0%, #2980b9 100%);
+            border-radius: 5px 5px 0 0;
+        }
+
+        .cabin-window {
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 25px;
+            background: linear-gradient(180deg, #85c1e9 0%, #5dade2 100%);
+            border-radius: 3px;
+            border: 2px solid #1a5276;
+        }
+
+        .chimney {
+            position: absolute;
+            bottom: 80px;
+            left: 30px;
+            width: 25px;
+            height: 40px;
+            background: linear-gradient(180deg, #2c3e50 0%, #1a252f 100%);
+            border-radius: 5px 5px 0 0;
+        }
+
+        .smoke {
+            position: absolute;
+            bottom: 120px;
+            left: 25px;
+        }
+
+        .smoke-puff {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            animation: smokeRise 1s infinite;
+        }
+
+        .smoke-puff:nth-child(1) { animation-delay: 0s; left: 0; }
+        .smoke-puff:nth-child(2) { animation-delay: 0.3s; left: -15px; }
+        .smoke-puff:nth-child(3) { animation-delay: 0.6s; left: -30px; }
+
+        @keyframes smokeRise {
+            0% { transform: translateY(0) scale(1); opacity: 0.8; }
+            100% { transform: translateY(-50px) scale(2); opacity: 0; }
+        }
+
+        .wheel {
+            position: absolute;
+            bottom: 0;
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(180deg, #34495e 0%, #2c3e50 100%);
+            border-radius: 50%;
+            border: 5px solid #f39c12;
+            animation: wheelSpin 0.5s linear infinite;
+        }
+
+        .wheel::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 10px;
+            height: 10px;
+            background: #f39c12;
+            border-radius: 50%;
+        }
+
+        .wheel-1 { left: 20px; }
+        .wheel-2 { left: 80px; }
+        .wheel-3 { left: 130px; }
+
+        @keyframes wheelSpin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Train cars */
+        .train-car {
+            position: relative;
+            width: 120px;
+            height: 80px;
+            margin-left: -10px;
+        }
+
+        .car-body {
+            position: absolute;
+            bottom: 20px;
+            width: 100px;
+            height: 50px;
+            border-radius: 5px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .car-1 .car-body { background: linear-gradient(180deg, #f1c40f 0%, #f39c12 100%); }
+        .car-2 .car-body { background: linear-gradient(180deg, #2ecc71 0%, #27ae60 100%); }
+        .car-3 .car-body { background: linear-gradient(180deg, #9b59b6 0%, #8e44ad 100%); }
+
+        .car-window {
+            position: absolute;
+            top: 10px;
+            width: 20px;
+            height: 20px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 3px;
+        }
+
+        .car-window-1 { left: 15px; }
+        .car-window-2 { left: 45px; }
+        .car-window-3 { left: 75px; }
+
+        .car-wheel {
+            position: absolute;
+            bottom: 0;
+            width: 30px;
+            height: 30px;
+            background: #34495e;
+            border-radius: 50%;
+            border: 4px solid #7f8c8d;
+            animation: wheelSpin 0.5s linear infinite;
+        }
+
+        .car-wheel-1 { left: 15px; }
+        .car-wheel-2 { left: 70px; }
+
+        /* Rail track */
+        .track {
+            position: fixed;
+            bottom: 80px;
+            left: 0;
+            width: 100%;
+            height: 20px;
+            background: linear-gradient(90deg, #8b4513 0%, #a0522d 50%, #8b4513 100%);
+            z-index: 5;
+        }
+
+        .track::before {
+            content: '';
+            position: absolute;
+            top: 5px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: repeating-linear-gradient(90deg, #4a4a4a 0px, #4a4a4a 50px, transparent 50px, transparent 70px);
+        }
+
+        .track::after {
+            content: '';
+            position: absolute;
+            bottom: 5px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: repeating-linear-gradient(90deg, #4a4a4a 0px, #4a4a4a 50px, transparent 50px, transparent 70px);
+        }
+
+        /* Ground */
+        .ground {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 80px;
+            background: linear-gradient(180deg, #27ae60 0%, #1e8449 100%);
+            z-index: 4;
+        }
+
+        .grass {
+            position: absolute;
+            bottom: 60px;
+            width: 100%;
+            height: 30px;
+            background: repeating-linear-gradient(90deg, 
+                transparent 0px, transparent 10px,
+                #2ecc71 10px, #2ecc71 12px);
+        }
+
+        /* Envelope */
+        .envelope-container {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 20;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.5s ease;
+        }
+
+        .envelope-container.show {
+            opacity: 1;
+            visibility: visible;
+            animation: envelopeBounce 0.8s ease;
+        }
+
+        @keyframes envelopeBounce {
+            0% { transform: translate(-50%, -50%) scale(0) rotate(-180deg); }
+            50% { transform: translate(-50%, -50%) scale(1.2) rotate(10deg); }
+            70% { transform: translate(-50%, -50%) scale(0.9) rotate(-5deg); }
+            100% { transform: translate(-50%, -50%) scale(1) rotate(0deg); }
+        }
+
+        .envelope {
+            width: 200px;
+            height: 140px;
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .envelope:hover {
+            transform: scale(1.1);
+        }
+
+        .envelope-body {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(180deg, #ffeaa7 0%, #fdcb6e 100%);
+            border-radius: 10px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+        }
+
+        .envelope-flap {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 0;
+            border-left: 100px solid transparent;
+            border-right: 100px solid transparent;
+            border-top: 70px solid #f9ca24;
+            transform-origin: top;
+            transition: transform 0.5s ease;
+        }
+
+        .envelope.opened .envelope-flap {
+            transform: rotateX(180deg);
+        }
+
+        .envelope-heart {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 50px;
+            animation: heartBeat 1s infinite;
+        }
+
+        @keyframes heartBeat {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); }
+            50% { transform: translate(-50%, -50%) scale(1.2); }
+        }
+
+        .click-hint {
+            position: absolute;
+            bottom: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            font-size: 14px;
+            font-weight: 600;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        /* Message Modal */
+        .message-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.5s ease;
+        }
+
+        .message-modal.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .message-card {
+            background: linear-gradient(135deg, #fff9c4 0%, #fff59d 50%, #ffee58 100%);
+            padding: 50px;
+            border-radius: 20px;
+            max-width: 600px;
+            margin: 20px;
+            text-align: center;
+            transform: scale(0) rotate(-10deg);
+            transition: transform 0.5s ease;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .message-modal.show .message-card {
+            transform: scale(1) rotate(0deg);
+        }
+
+        .message-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .message-icon {
+            font-size: 80px;
+            margin-bottom: 20px;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .message-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 32px;
+            color: #e74c3c;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .message-text {
+            font-size: 24px;
+            color: #2c3e50;
+            font-weight: 700;
+            line-height: 1.6;
+            position: relative;
+            z-index: 1;
+        }
+
+        .message-decorations {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 30px;
+            font-size: 30px;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 30px;
+            cursor: pointer;
+            color: #e74c3c;
+            transition: transform 0.3s ease;
+            z-index: 10;
+        }
+
+        .close-btn:hover {
+            transform: rotate(90deg) scale(1.2);
+        }
+
+        /* Confetti */
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            z-index: 150;
+            animation: confettiFall 3s linear forwards;
+        }
+
+        @keyframes confettiFall {
+            0% { transform: translateY(-100vh) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+        }
+
+        /* Flowers on ground */
+        .flower {
+            position: fixed;
+            bottom: 85px;
+            z-index: 6;
+            font-size: 24px;
+            animation: sway 2s ease-in-out infinite;
+        }
+
+        @keyframes sway {
+            0%, 100% { transform: rotate(-5deg); }
+            50% { transform: rotate(5deg); }
+        }
+    </style>
+</head>
+<body>
+
+	 <!-- Background decorations -->
+    <div class="bg-circles">
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+    </div>
+
+    <div class="stars" id="stars"></div>
+
+    <!-- Train -->
+    <div class="train-container" id="train">
+        <div class="train">
+            <div class="locomotive">
+                <div class="smoke">
+                    <div class="smoke-puff"></div>
+                    <div class="smoke-puff"></div>
+                    <div class="smoke-puff"></div>
+                </div>
+                <div class="chimney"></div>
+                <div class="loco-cabin">
+                    <div class="cabin-window"></div>
+                </div>
+                <div class="loco-body"></div>
+                <div class="wheel wheel-1"></div>
+                <div class="wheel wheel-2"></div>
+                <div class="wheel wheel-3"></div>
+            </div>
+            <div class="train-car car-1">
+                <div class="car-body">
+                    <div class="car-window car-window-1"></div>
+                    <div class="car-window car-window-2"></div>
+                </div>
+                <div class="car-wheel car-wheel-1"></div>
+                <div class="car-wheel car-wheel-2"></div>
+            </div>
+            <div class="train-car car-2">
+                <div class="car-body">
+                    <div class="car-window car-window-1"></div>
+                    <div class="car-window car-window-2"></div>
+                </div>
+                <div class="car-wheel car-wheel-1"></div>
+                <div class="car-wheel car-wheel-2"></div>
+            </div>
+            <div class="train-car car-3">
+                <div class="car-body">
+                    <div class="car-window car-window-1"></div>
+                    <div class="car-window car-window-2"></div>
+                </div>
+                <div class="car-wheel car-wheel-1"></div>
+                <div class="car-wheel car-wheel-2"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Track -->
+    <div class="track"></div>
+
+    <!-- Ground -->
+    <div class="ground">
+        <div class="grass"></div>
+    </div>
+
+    <!-- Flowers -->
+    <div class="flower" style="left: 5%;">🌸</div>
+    <div class="flower" style="left: 15%; animation-delay: 0.5s;">🌺</div>
+    <div class="flower" style="left: 25%; animation-delay: 1s;">🌻</div>
+    <div class="flower" style="left: 45%; animation-delay: 0.3s;">🌷</div>
+    <div class="flower" style="left: 60%; animation-delay: 0.7s;">🌼</div>
+    <div class="flower" style="left: 75%; animation-delay: 0.2s;">🌸</div>
+    <div class="flower" style="left: 85%; animation-delay: 0.9s;">🌺</div>
+    <div class="flower" style="left: 95%; animation-delay: 0.4s;">🌻</div>
+
+    <!-- Envelope -->
+    <div class="envelope-container" id="envelopeContainer">
+        <div class="envelope" id="envelope">
+            <div class="envelope-body"></div>
+            <div class="envelope-flap"></div>
+            <div class="envelope-heart">💌</div>
+        </div>
+        <div class="click-hint">✨ Nhấn để mở thư ✨</div>
+    </div>
+
+    <!-- Message Modal -->
+    <div class="message-modal" id="messageModal">
+        <div class="message-card">
+            <span class="close-btn" id="closeBtn">✕</span>
+            <div class="message-icon">🌟</div>
+            <div class="message-title">Thông Điệp Tích Cực</div>
+            <div class="message-text">
+                "Một lời khen làm bừng sáng ngày của ai đó, một chút kiên nhẫn làm nở hoa cuộc đời chính mình. ☀️
+Đừng khắt khe nhé, vì mỗi nụ cười trao đi hay phút giây vỗ về tâm hồn đều đang tạo nên một phiên bản bạn tuyệt vời hơn mỗi ngày. Hãy cùng lan tỏa ấm áp bằng một bình luận tích cực dưới đây nhé! ✨"
+            </div>
+            <div class="message-decorations">
+                <span>💪</span>
+                <span>🌈</span>
+                <span>❤️</span>
+                <span>✨</span>
+                <span>🎯</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Create stars
+        const starsContainer = document.getElementById('stars');
+        for (let i = 0; i < 50; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 60 + '%';
+            star.style.animationDelay = Math.random() * 2 + 's';
+            starsContainer.appendChild(star);
+        }
+
+        // Show envelope after train passes
+        const train = document.getElementById('train');
+        const envelopeContainer = document.getElementById('envelopeContainer');
+        const envelope = document.getElementById('envelope');
+        const messageModal = document.getElementById('messageModal');
+        const closeBtn = document.getElementById('closeBtn');
+
+        train.addEventListener('animationend', () => {
+            setTimeout(() => {
+                envelopeContainer.classList.add('show');
+            }, 500);
+        });
+
+        // Open envelope and show message
+        envelope.addEventListener('click', () => {
+            envelope.classList.add('opened');
+            setTimeout(() => {
+                messageModal.classList.add('show');
+                createConfetti();
+            }, 500);
+        });
+
+        // Close modal
+        closeBtn.addEventListener('click', () => {
+            messageModal.classList.remove('show');
+        });
+
+        messageModal.addEventListener('click', (e) => {
+            if (e.target === messageModal) {
+                messageModal.classList.remove('show');
+            }
+        });
+
+        function createConfetti() { 
+        	const colors = ['#e74c3c', '#3498db', '#2ecc71', '#f1c40f', '#9b59b6', '#e91e63', '#00bcd4']; 
+        	for (let i = 0; i < 100; ++i) { 
+        		setTimeout(() => { 
+        			const confetti = document.createElement('div'); 
+        			confetti.className = 'confetti'; 
+        			confetti.style.left = Math.random() * 100 + '%'; 
+        			confetti.style.background = colors[Math.floor(Math.random() * colors.length)]; 
+        			confetti.style.width = (Math.random() * 10 + 5) + 'px'; 
+        			confetti.style.height = (Math.random() * 10 + 5) + 'px'; 
+        			confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0'; 
+        			confetti.style.animationDuration = (Math.random() * 2 + 2) + 's'; 
+        			document.body.appendChild(confetti); 
+
+        			setTimeout(() => { 
+        				confetti.remove(); 
+        			}, 4000); 
+        		},i * 30); 
+        	}
+        }
+	</script>
+</body>
+</html>
